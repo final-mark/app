@@ -25,7 +25,7 @@ class SubjectScreen extends StatelessWidget {
       )
     );
   }
-  
+
 }
 
 class SubjectList extends StatelessWidget {
@@ -45,7 +45,7 @@ class SubjectList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               new Text(subjects[index].name, style:TextStyle(
-                fontWeight:FontWeight.bold, 
+                fontWeight:FontWeight.bold,
                 fontSize: 16.0)
                 )
             ],

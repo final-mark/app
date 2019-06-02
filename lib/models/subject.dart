@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../store/store.dart';
 
 class Subject {
   String code;
@@ -10,7 +11,7 @@ class Subject {
   List marks;
 
   Subject({
-    this.code, 
+    this.code,
     this.name,
     this.absences,
     this.credits,
@@ -51,8 +52,24 @@ Future<List<Subject>> fetchSubjects(String username, String password) async {
       final subjectList = await subjects.map<Subject>((json) {
         return Subject.fromJson(json);
       });
+
+      final store = await UserDataStore.getStore();
+      store.setCredentials({
+        "username": username,
+        "password": password
+      });
+
       return subjectList.toList();
     }
   }
   throw Exception("deu merda hein, ${response.body}    ${username + " " + password}");
+}
+
+void storeInfo(String username, String password, List subjects) {
+  UserDataStore store = UserDataStore();
+  store.setCredentials({
+    username: username,
+    password: password
+    });
+  store.setSubjects(subjects);
 }

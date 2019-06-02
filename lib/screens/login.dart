@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'subjects.dart';
+import '../store/store.dart';
 
 class Login extends StatefulWidget {
   Login({Key key, this.title}) : super(key: key);
@@ -15,6 +16,23 @@ class _LoginState extends State<Login> {
 
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    UserDataStore.getStore().then((store) {
+      if (store.hasLogged()) {
+        final credentials = store.getCredentials();
+        Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SubjectScreen(
+                    username: credentials['username'],
+                    password: credentials['password'])));
+      }
+    });
+
+  }
 
   @override
   void dispose() {
@@ -54,7 +72,7 @@ class _LoginState extends State<Login> {
       child: MaterialButton(
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: (){ 
+          onPressed: (){
             Navigator.push(
               context,
               MaterialPageRoute(
