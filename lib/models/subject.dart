@@ -31,38 +31,50 @@ class Subject {
   }
 }
 
-Future<List<Subject>> fetchSubjects(String username, String password) async {
-  final response = await http.post(
-    'http://scaler.mmelo.me',
-    body: json.encode({
-      "plugin": "finalmark",
-      "action": "refresh_user",
-      "username": username,
-      "password": password
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  );
-
-  if(response.statusCode == 200) {
-    Map<String, dynamic> responseData = json.decode(response.body);
-    if(responseData['status'] == 'success') {
-      final subjects = responseData['subjects'];
-      final subjectList = await subjects.map<Subject>((json) {
-        return Subject.fromJson(json);
-      });
-
-      final store = await UserDataStore.getStore();
-      store.setCredentials({
+Future<List<Subject>> fetchSubjects({String username, String password, bool force}) async {
+  final store = await UserDataStore.getStore();
+  var subjects = [];
+  if (force) {
+    final response = await http.post(
+      'http://scaler.mmelo.me',
+      body: json.encode({
+        "plugin": "finalmark",
+        "action": "refresh_user",
         "username": username,
         "password": password
-      });
-
-      return subjectList.toList();
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    );
+    if(response.statusCode == 200) {
+      Map<String, dynamic> responseData = json.decode(response.body);
+      if(responseData['status'] == 'success') {
+        subjects = responseData['subjects'];
+      }
+      store.setUserInfo(responseData['user_info']);
     }
-  }
-  throw Exception("deu merda hein, ${response.body}    ${username + " " + password}");
+    else {
+      throw Exception("deu merda hein, ${response.body}    ${username + " " + password}");
+      }
+    } else {
+      subjects = store.getSubjects();
+    }
+
+  final subjectList = await subjects.map<Subject>((json) {
+    return Subject.fromJson(json);
+  });
+
+  store.setCredentials({
+    "username": username,
+    "password": password
+  });
+
+  store.setSubjects(subjects);
+
+  print(store.getUserInfo());
+
+  return subjectList.toList();
 }
 
 void storeInfo(String username, String password, List subjects) {

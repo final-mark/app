@@ -5,8 +5,9 @@ class SubjectScreen extends StatelessWidget {
 
   final String username;
   final String password;
+  final bool hasLogged;
 
-  SubjectScreen({Key key, @required this.username, @required this.password}) : super(key: key);
+  SubjectScreen({Key key, @required this.username, @required this.password, this.hasLogged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class SubjectScreen extends StatelessWidget {
         title: Text("Disciplinas")
       ),
       body:FutureBuilder(
-        future: fetchSubjects(this.username, this.password),
+        future: fetchSubjects(username: this.username, password: this.password, force: !this.hasLogged),
         builder: (context, snapshot) {
           if(snapshot.hasError) {
             print(snapshot.error);

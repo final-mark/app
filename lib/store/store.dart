@@ -25,6 +25,15 @@ class UserDataStore {
     return { "username": username, "password": password };
   }
 
+  dynamic getUserInfo() {
+    final info = this.store.getString('finalmark:userInfo');
+    return json.decode(info);
+  }
+
+  void setUserInfo(dynamic userInfo) {
+    this.store.setString('finalmark:userInfo', json.encode(userInfo));
+  }
+
   void setCredentials(dynamic credentials) {
     this.store.setString('finalmark:username', credentials['username']);
     this.store.setString('finalmark:password', credentials['password']);

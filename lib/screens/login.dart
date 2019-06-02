@@ -28,7 +28,8 @@ class _LoginState extends State<Login> {
                 MaterialPageRoute(
                   builder: (context) => SubjectScreen(
                     username: credentials['username'],
-                    password: credentials['password'])));
+                    password: credentials['password'],
+                    hasLogged: true)));
       }
     });
 
@@ -76,7 +77,9 @@ class _LoginState extends State<Login> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SubjectScreen(username: usernameController.text, password: passwordController.text)
+                builder: (context) => SubjectScreen(username: usernameController.text,
+                                                    password: passwordController.text,
+                                                    hasLogged: false)
               )
             );
             },
