@@ -39,7 +39,7 @@ class _AppConfig extends State<LoginExample> with SingleTickerProviderStateMixin
     return MaterialApp(
       title: 'LoginExample',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.blue,
       ),
       initialRoute: '/',
       routes: {

@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
     final LoginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Colors.pink,
+      color: Colors.blue,
       child: MaterialButton(
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -107,32 +107,20 @@ class _LoginState extends State<Login> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'Login Example',
-                      style: style.copyWith(
-                          color: Colors.pink,
-                          fontSize: 48.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 45.0),
+                    Image.asset('assets/fmlogo.png', width: 250, height: 250),
+                    SizedBox(height: 40.0),
                     usernameField,
                     SizedBox(height: 25.0),
                     passwordField,
                     SizedBox(height: 35.0),
                     LoginButton,
-                    SizedBox(height: 15.0),
-                    InkWell(
-                        child: Text(
-                          'Create an account',
-                          style: style.copyWith(
-                              fontWeight: FontWeight.bold, color: Colors.grey),
-                        ),
-                        onTap: () => Navigator.pushNamed(context, '/signup'))
-                  ],
-                ),
+                    SizedBox(height: 15.0)
+                  ]
               ),
             ),
           ),
-        ));
+        )
+      )
+     );
   }
 }

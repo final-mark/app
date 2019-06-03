@@ -47,16 +47,15 @@ Future<List<Subject>> fetchSubjects({String username, String password, bool forc
         "Content-Type": "application/json"
       }
     );
-    if(response.statusCode == 200) {
-      Map<String, dynamic> responseData = json.decode(response.body);
-      if(responseData['status'] == 'success') {
-        subjects = responseData['subjects'];
-      }
-      store.setUserInfo(responseData['user_info']);
-    }
-    else {
-      throw Exception("deu merda hein, ${response.body}    ${username + " " + password}");
-      }
+      if(response.statusCode == 200) {
+        Map<String, dynamic> responseData = json.decode(response.body);
+        if(responseData['status'] == 'success') {
+          subjects = responseData['subjects'];
+        }
+        store.setUserInfo(responseData['user_info']);
+      } else {
+        throw Exception("deu merda hein, ${response.body}    ${username + " " + password}");
+        }
     } else {
       subjects = store.getSubjects();
     }
