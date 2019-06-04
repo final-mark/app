@@ -14,16 +14,16 @@ void printHello() {
 void main() async {
   final int helloAlarmID = 0;
   await AndroidAlarmManager.initialize();
-  runApp(LoginExample());
+  runApp(FinalMark());
   // await AndroidAlarmManager.periodic(const Duration(seconds: 10), helloAlarmID, printHello);
 }
 
-class LoginExample extends StatefulWidget {
+class FinalMark extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _AppConfig();
 }
 
-class _AppConfig extends State<LoginExample> with SingleTickerProviderStateMixin {
+class _AppConfig extends State<FinalMark> with SingleTickerProviderStateMixin {
 
   FlutterLocalNotificationsPlugin notifications;
 
@@ -37,7 +37,7 @@ class _AppConfig extends State<LoginExample> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      title: 'LoginExample',
+      title: 'FinalMark',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
