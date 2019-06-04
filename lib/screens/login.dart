@@ -24,15 +24,14 @@ class _LoginState extends State<Login> {
       if (store.hasLogged()) {
         final credentials = store.getCredentials();
         Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SubjectScreen(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SubjectScreen(
                     username: credentials['username'],
                     password: credentials['password'],
                     hasLogged: true)));
       }
     });
-
   }
 
   @override
@@ -73,16 +72,15 @@ class _LoginState extends State<Login> {
       child: MaterialButton(
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: (){
+          onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SubjectScreen(username: usernameController.text,
-                                                    password: passwordController.text,
-                                                    hasLogged: false)
-              )
-            );
-            },
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SubjectScreen(
+                        username: usernameController.text,
+                        password: passwordController.text,
+                        hasLogged: false)));
+          },
           child: Text(
             "Login",
             textAlign: TextAlign.center,
@@ -94,16 +92,16 @@ class _LoginState extends State<Login> {
     return Scaffold(
         resizeToAvoidBottomPadding: true,
         body: Center(
-          child: SafeArea(
-            left: true,
-            top: true,
-            right: true,
-            bottom: true,
-            child: Container(
-              color: Color(0xFFEDEDED),
-              child: Padding(
-                padding: const EdgeInsets.all(36.0),
-                child: Column(
+            child: SafeArea(
+          left: true,
+          top: true,
+          right: true,
+          bottom: true,
+          child: Container(
+            color: Color(0xFFEDEDED),
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -115,12 +113,9 @@ class _LoginState extends State<Login> {
                     SizedBox(height: 35.0),
                     LoginButton,
                     SizedBox(height: 15.0)
-                  ]
-              ),
+                  ]),
             ),
           ),
-        )
-      )
-     );
+        )));
   }
 }
