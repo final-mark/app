@@ -75,7 +75,7 @@ class _PanelsState extends State<Panels> with SingleTickerProviderStateMixin {
                         return GestureDetector(
                             child: Container(
                                 padding: EdgeInsets.all(5.0),
-                                child: SubjectCard(this.subjects[index].name)
+                                child: SubjectCard(this.subjects[index]),
                                 ));
                       },
                       itemCount: this.subjects.length,
