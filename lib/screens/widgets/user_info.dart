@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 class UserInfo extends StatefulWidget {
 
   final userInfo;
+  final isToggled;
 
-  UserInfo(this.userInfo);
+  UserInfo(this.userInfo, this.isToggled);
 
   @override
   State<StatefulWidget> createState() {
-    return _UserInfo(this.userInfo);
+    return _UserInfo(this.userInfo, this.isToggled);
   }
 }
 
@@ -17,9 +18,9 @@ class UserInfo extends StatefulWidget {
 class _UserInfo extends State<UserInfo> {
 
   dynamic userInfo;
-  dynamic isToggled = false;
+  dynamic isToggled;
 
-  _UserInfo(this.userInfo);
+  _UserInfo(this.userInfo, this.isToggled);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,6 @@ class _UserInfo extends State<UserInfo> {
     final iconMargin = (width - textWidth) / 2;
 
     return GestureDetector(
-      onTap: () => this.isToggled = !this.isToggled,
       child: Column(
         children: <Widget> [
           Container(height: initialPadding, color: Colors.blue),
@@ -52,7 +52,7 @@ class _UserInfo extends State<UserInfo> {
                 ),
                 Container(
                   margin: EdgeInsets.only(right: iconMargin),
-                  child: this.isToggled ?
+                  child: this.isToggled() ?
                     Icon(Icons.keyboard_arrow_up, color: Colors.white) :
                     Icon(Icons.keyboard_arrow_down, color: Colors.white)
                 )

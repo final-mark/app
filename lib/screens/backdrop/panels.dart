@@ -1,6 +1,7 @@
 import 'package:finalmark/models/subject.dart';
 import 'package:finalmark/screens/widgets/subject_card.dart';
 import 'package:finalmark/screens/widgets/user_info.dart';
+import 'package:finalmark/store/store.dart';
 import 'package:flutter/material.dart';
 
 class Panels extends StatefulWidget {
@@ -56,7 +57,7 @@ class _PanelsState extends State<Panels> with SingleTickerProviderStateMixin {
                     child: new Container(
                       alignment: Alignment.center,
                       height: constraints.biggest.height * 0.2,
-                      child: UserInfo(this.userInfo),
+                      child: UserInfo(this.userInfo, () => this.isVisible),
                     ),
                   ),
                 )
@@ -70,16 +71,23 @@ class _PanelsState extends State<Panels> with SingleTickerProviderStateMixin {
                     borderRadius: new BorderRadius.only(
                         topLeft: new Radius.circular(20.0),
                         topRight: new Radius.circular(20.0)),
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                            child: Container(
-                                padding: EdgeInsets.all(5.0),
-                                child: SubjectCard(this.subjects[index]),
-                                ));
+                    child: RefreshIndicator(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              child: Container(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: SubjectCard(this.subjects[index]),
+                              )
+                          );
+                        },
+                        itemCount: this.subjects.length,
+                      ),
+                      onRefresh: () async {
+                        var store = await UserDataStore.getStore();
+                        store.clean();
                       },
-                      itemCount: this.subjects.length,
-                    ),
+                    )
                   )),
             ],
           ),

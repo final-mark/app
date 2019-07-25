@@ -25,7 +25,6 @@ class _SubjectScreenState extends State<SubjectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(title: Text("Disciplinas")),
         body: FutureBuilder(
             future: fetchSubjects(
                 username: this.username,
