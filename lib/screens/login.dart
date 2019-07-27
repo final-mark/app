@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
     UserDataStore.getStore().then((store) {
       if (store.hasLogged()) {
         final credentials = store.getCredentials();
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => SubjectScreen(
@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
           minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => SubjectScreen(

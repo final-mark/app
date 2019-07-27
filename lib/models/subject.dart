@@ -8,7 +8,7 @@ class Subject {
   int absences;
   int credits;
   String semester;
-  List marks;
+  List<double> marks;
 
   Subject({
     this.code,
@@ -18,6 +18,11 @@ class Subject {
     this.semester,
     this.marks
   });
+
+  double get average {
+    double total = this.marks.reduce((a,b) => a+b);
+    return ((total / this.marks.length) * 10).roundToDouble() / 10.0;
+  }
 
   factory Subject.fromJson(Map<String, dynamic> json) {
     return Subject(

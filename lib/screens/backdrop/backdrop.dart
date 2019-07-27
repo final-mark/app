@@ -1,6 +1,7 @@
 import 'package:finalmark/models/subject.dart';
 import 'package:flutter/material.dart';
 import 'panels.dart';
+import '../widgets/floating_button.dart';
 
 class Backdrop extends StatefulWidget {
   List<Subject> subjects;
@@ -35,6 +36,9 @@ class _BackdropState extends State<Backdrop>
 
   @override
   Widget build(BuildContext context) {
-    return Panels(this.controller, this.subjects, this.userInfo);
+    return Scaffold(
+      floatingActionButton: FancyFab(),
+      body: Panels(this.controller, this.subjects, this.userInfo)
+      );
   }
 }
