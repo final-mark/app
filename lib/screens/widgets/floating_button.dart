@@ -43,7 +43,7 @@ class _FancyFabState extends State<FancyFab>
     ));
     _translateButton = Tween<double>(
       begin: _fabHeight,
-      end: 0.0,
+      end: -14.0,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Interval(

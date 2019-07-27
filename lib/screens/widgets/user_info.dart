@@ -52,7 +52,7 @@ class _UserInfo extends State<UserInfo> {
                 ),
                 Container(
                   margin: EdgeInsets.only(right: iconMargin),
-                  child: this.isToggled() ?
+                  child: !this.isToggled() ?
                     Icon(Icons.keyboard_arrow_up, color: Colors.white) :
                     Icon(Icons.keyboard_arrow_down, color: Colors.white)
                 )
@@ -85,7 +85,6 @@ class _UserInfo extends State<UserInfo> {
                 Text("${this.userInfo['semesters']}/${this.userInfo['max_semesters']}",
                     style: TextStyle(color: Colors.white))
               ]),
-
         ]
       )
     );
